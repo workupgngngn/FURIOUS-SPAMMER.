@@ -1,0 +1,290 @@
+--[[
+    FURIOUS SPAMMER V1 - Fixed & Updated
+]]
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TextChatService = game:GetService("TextChatService")
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local PlayerName = LocalPlayer.DisplayName or LocalPlayer.Name
+
+local RP_NAME = "ðŸ…ðŸ…›ðŸ…ŸðŸ…—ðŸ… ðŸ…¢ðŸ…ŸðŸ…ðŸ…œðŸ…œðŸ…”_ðŸ…¥âžŽâž"
+local RP_BIO  = "WELCOME DEAR " .. PlayerName .. " JI â¤"
+
+pcall(function()
+    for _, name in pairs({"FuriousSpammerV1", "FuriousPaPaSpammer"}) do
+        if CoreGui:FindFirstChild(name) then CoreGui[name]:Destroy() end
+        if PlayerGui:FindFirstChild(name) then PlayerGui[name]:Destroy() end
+    end
+end)
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "FuriousSpammerV1"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+pcall(function() gui.Parent = CoreGui end)
+if not gui.Parent then gui.Parent = PlayerGui end
+
+-- ==================== LOADING (ONLY FURIOUS) ====================
+local LoadBG = Instance.new("Frame", gui)
+LoadBG.Size = UDim2.new(1, 0, 1, 0)
+LoadBG.BackgroundColor3 = Color3.fromRGB(5, 0, 0)
+LoadBG.BorderSizePixel = 0
+LoadBG.ZIndex = 50
+
+for i = 1, 12 do
+    local drip = Instance.new("Frame", LoadBG)
+    drip.Size = UDim2.new(0, math.random(2, 5), 0, 0)
+    drip.Position = UDim2.new(math.random(5, 95) / 100, 0, 0, 0)
+    drip.BackgroundColor3 = Color3.fromRGB(130 + math.random(0, 30), 0, 0)
+    drip.BorderSizePixel = 0
+    drip.ZIndex = 51
+    TweenService:Create(drip, TweenInfo.new(1.2 + math.random(), Enum.EasingStyle.Quad), {
+        Size = UDim2.new(0, drip.Size.X.Offset, 0, math.random(100, 300))
+    }):Play()
+end
+
+local FuriousText = Instance.new("TextLabel", LoadBG)
+FuriousText.Size = UDim2.new(1, 0, 0, 60)
+FuriousText.Position = UDim2.new(0, 0, 0.42, 0)
+FuriousText.BackgroundTransparency = 1
+FuriousText.Text = "FURIOUS"
+FuriousText.Font = Enum.Font.GothamBlack
+FuriousText.TextSize = 52
+FuriousText.TextColor3 = Color3.fromRGB(160, 0, 0)
+FuriousText.TextTransparency = 1
+FuriousText.ZIndex = 52
+
+local SubText = Instance.new("TextLabel", LoadBG)
+SubText.Size = UDim2.new(1, 0, 0, 25)
+SubText.Position = UDim2.new(0, 0, 0.54, 0)
+SubText.BackgroundTransparency = 1
+SubText.Text = "SPAMMER V1"
+SubText.Font = Enum.Font.GothamBold
+SubText.TextSize = 15
+SubText.TextColor3 = Color3.fromRGB(180, 40, 40)
+SubText.TextTransparency = 1
+SubText.ZIndex = 52
+
+TweenService:Create(FuriousText, TweenInfo.new(1.2), {TextTransparency = 0}):Play()
+task.wait(0.4)
+TweenService:Create(SubText, TweenInfo.new(0.9), {TextTransparency = 0}):Play()
+task.wait(2)
+LoadBG:Destroy()
+
+-- ==================== ROLEPLAY ====================
+task.spawn(function()
+    pcall(function()
+        local RE = ReplicatedStorage:WaitForChild("RE", 6)
+        if not RE then return end
+        local NameRemote = RE:FindFirstChild("1RPNam1eTex1t")
+        local ColorRemote = RE:FindFirstChild("1RPNam1eColo1r")
+        if NameRemote then
+            for i = 1, 6 do
+                NameRemote:FireServer("RolePlayName", RP_NAME)
+                NameRemote:FireServer("RolePlayBio", RP_BIO)
+                task.wait(0.35)
+            end
+        end
+        if ColorRemote then
+            while true do
+                local c = Color3.fromHSV((tick() % 5) / 5, 1, 1)
+                ColorRemote:FireServer("PickingRPNameColor", c)
+                ColorRemote:FireServer("PickingRPBioColor", c)
+                task.wait(0.1)
+            end
+        end
+    end)
+end)
+
+local function sendChat(msg)
+    pcall(function()
+        if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+            local generalChannel = TextChatService.TextChannels:FindFirstChild("RBXGeneral")
+            if generalChannel then
+                generalChannel:SendAsync(msg)
+                return
+            end
+        end
+    end)
+    pcall(function()
+        local ev = ReplicatedStorage:FindFirstChild("DefaultChatSystemChatEvents")
+        if ev and ev.SayMessageRequest then
+            ev.SayMessageRequest:FireServer(msg, "All")
+        end
+    end)
+end
+
+-- ==================== LOCAL MSGS ====================
+local head = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+local msgs = {
+    "TMX FURIOUS WAVE SONIC LVL MAX",
+    "LEAVE KRDE",
+    "TMX GODZILLA POWER VOID SPELL",
+    "DAR GAYA FURIOUS SE?",
+    "TMX HYPER BEAM NOVA FORCE",
+    "JHUK GAYA NA",
+    "TMX DARK POWER DIMENSION WAVE",
+    "AB BOL",
+    "TMX FURIOUS NE PACK KAR DIYA",
+    "KYA HUA",
+    "TMX PARALLEL WAVE POWER MAX",
+    "JHUK GAYA FURIOUS KE SAAMNE?",
+    "TMX GODZILLA HYPER FORCE LVL",
+    "CHUP HO GAYA?",
+    "TMX VOID WORM SONIC BEAM",
+    "AB LEAVE KRDE",
+    "TMX NOVA DIMENSION GODLY POWER",
+    "ITNA HI THA?",
+    "TMX FURIOUS MAX POWER EDITOR",
+    "DAR GAYA NA",
+    "TMX DARK VOID HYPER WAVE",
+    "BHAAG MAT FURIOUS KE SAAMNE",
+    "TMX GODZILLA SONIC PARALLEL FORCE",
+    "AB KYA KAROGE SON",
+    "TMX ULTIMATE FURIOUS SPELL POWER",
+    "KNEEL DOWN WHEN FURIOUS ARRIVES",
+    "TMX VOID BEAM GODLY DIMENSION",
+    "TMX FURIOUS SE PANGA LEGA?",
+    "TMX MAX LVL SONIC FORCE",
+    "LEAVE KRDE FURIOUS AA GAYA",
+    "TMX FINAL WAVE GODZILLA POWER",
+    "AB BOL NA"
+}
+
+-- ==================== UI ====================
+local Main = Instance.new("Frame", gui)
+Main.Size = UDim2.new(0, 300, 0, 255)
+Main.Position = UDim2.new(0.5, -150, 0.5, -127)
+Main.BackgroundColor3 = Color3.fromRGB(12, 4, 4)
+Main.BorderSizePixel = 0
+Main.Active = true
+Main.Draggable = true
+Instance.new("UICorner", Main).CornerRadius = UDim.new(0, 12)
+
+local stroke = Instance.new("UIStroke", Main)
+stroke.Color = Color3.fromRGB(160, 20, 20)
+stroke.Thickness = 1.6
+
+local Title = Instance.new("TextLabel", Main)
+Title.Size = UDim2.new(1, 0, 0, 42)
+Title.BackgroundColor3 = Color3.fromRGB(30, 8, 8)
+Title.BorderSizePixel = 0
+Title.Text = "FURIOUS SPAMMER V1"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 15
+Title.TextColor3 = Color3.fromRGB(255, 120, 120)
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Instance.new("UICorner", Title).CornerRadius = UDim.new(0, 12)
+
+local TargetBox = Instance.new("TextBox", Main)
+TargetBox.Size = UDim2.new(1, -30, 0, 32)
+TargetBox.Position = UDim2.new(0, 15, 0, 55)
+TargetBox.BackgroundColor3 = Color3.fromRGB(30, 10, 10)
+TargetBox.PlaceholderText = "Target Name"
+TargetBox.Text = ""
+TargetBox.Font = Enum.Font.Gotham
+TargetBox.TextSize = 13
+TargetBox.TextColor3 = Color3.fromRGB(255, 200, 200)
+TargetBox.ClearTextOnFocus = false
+Instance.new("UICorner", TargetBox).CornerRadius = UDim.new(0, 8)
+
+local DelayBox = Instance.new("TextBox", Main)
+DelayBox.Size = UDim2.new(1, -30, 0, 32)
+DelayBox.Position = UDim2.new(0, 15, 0, 100)
+DelayBox.BackgroundColor3 = Color3.fromRGB(30, 10, 10)
+DelayBox.Text = "2.0"
+DelayBox.Font = Enum.Font.GothamBold
+DelayBox.TextSize = 13
+DelayBox.TextColor3 = Color3.fromRGB(255, 100, 100)
+DelayBox.ClearTextOnFocus = false
+Instance.new("UICorner", DelayBox).CornerRadius = UDim.new(0, 8)
+
+local Status = Instance.new("TextLabel", Main)
+Status.Size = UDim2.new(1, -30, 0, 20)
+Status.Position = UDim2.new(0, 15, 0, 145)
+Status.BackgroundTransparency = 1
+Status.Text = "Status: READY"
+Status.Font = Enum.Font.Gotham
+Status.TextSize = 12
+Status.TextColor3 = Color3.fromRGB(255, 120, 120)
+Status.TextXAlignment = Enum.TextXAlignment.Left
+
+local Toggle = Instance.new("TextButton", Main)
+Toggle.Size = UDim2.new(1, -30, 0, 40)
+Toggle.Position = UDim2.new(0, 15, 0, 180)
+Toggle.BackgroundColor3 = Color3.fromRGB(140, 15, 15)
+Toggle.Text = "START SPAM"
+Toggle.Font = Enum.Font.GothamBold
+Toggle.TextSize = 15
+Toggle.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", Toggle).CornerRadius = UDim.new(0, 9)
+
+local SideBtn = Instance.new("TextButton", gui)
+SideBtn.Size = UDim2.new(0, 50, 0, 50)
+SideBtn.Position = UDim2.new(0, 12, 0.45, 0)
+SideBtn.BackgroundColor3 = Color3.fromRGB(120, 15, 15)
+SideBtn.Text = "F"
+SideBtn.Font = Enum.Font.GothamBlack
+SideBtn.TextSize = 18
+SideBtn.TextColor3 = Color3.new(1,1,1)
+SideBtn.Visible = false
+Instance.new("UICorner", SideBtn).CornerRadius = UDim.new(0, 10)
+
+local MiniBtn = Instance.new("TextButton", Title)
+MiniBtn.Size = UDim2.new(0, 28, 0, 24)
+MiniBtn.Position = UDim2.new(1, -36, 0, 9)
+MiniBtn.BackgroundColor3 = Color3.fromRGB(70, 15, 15)
+MiniBtn.Text = "X"
+MiniBtn.Font = Enum.Font.GothamBold
+MiniBtn.TextSize = 14
+MiniBtn.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", MiniBtn).CornerRadius = UDim.new(0, 6)
+
+MiniBtn.MouseButton1Click:Connect(function()
+    Main.Visible = false
+    SideBtn.Visible = true
+end)
+
+SideBtn.MouseButton1Click:Connect(function()
+    Main.Visible = true
+    SideBtn.Visible = false
+end)
+
+local running = false
+Toggle.MouseButton1Click:Connect(function()
+    if running then
+        running = false
+        Toggle.Text = "START SPAM"
+        Toggle.BackgroundColor3 = Color3.fromRGB(140, 15, 15)
+        Status.Text = "Status: STOPPED"
+    else
+        running = true
+        Toggle.Text = "STOP SPAM"
+        Toggle.BackgroundColor3 = Color3.fromRGB(70, 8, 8)
+        Status.Text = "Status: SPAMMING..."
+
+        task.spawn(function()
+            while running do
+                local target = TargetBox.Text
+                local prefix = target ~= "" and ("[" .. target .. "] ") or ""
+                local msg = head .. prefix .. msgs[math.random(1, #msgs)]
+                sendChat(msg)
+                task.wait(tonumber(DelayBox.Text) or 2)
+            end
+        end)
+    end
+end)
+
+task.spawn(function()
+    while Main and Main.Parent do
+        stroke.Color = Color3.fromRGB(120 + math.sin(tick() * 2) * 40, 0, 0)
+        task.wait(0.08)
+    end
+end)
+
+print("âœ… FURIOUS SPAMMER V1 Ready")
